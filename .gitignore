@@ -1,0 +1,22 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# OS/Editor
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Virtual environments
+.venv/
+
+# Project data (SQLite)
+data/database.db
+
+# Local artifacts
+folga_funcionarios.xlsx
+
+# Legacy script (not part of new app)
+tabelav2.py
