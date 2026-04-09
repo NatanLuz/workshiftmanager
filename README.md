@@ -1,4 +1,4 @@
-# Workshift Manager — Gerador de Escalas de Trabalho
+# Workshift Manager — Gerador de Escalas de Trabalho com PYTHON E EXCEL
 
 Aplicação profissional e enxuta para geração de escalas de trabalho (semanal ou mensal), construída em Python com Tkinter e SQLite. Foco total em organização de turnos e escalas, com cadastro mínimo de colaboradores.
 
