@@ -1,75 +1,105 @@
 # Workshift Manager — Gerador de Escalas de Trabalho
 
-Aplicação desktop para geração e gestão de escalas de trabalho, desenvolvida em Python com interface gráfica em Tkinter e persistência em SQLite. Focada em organização operacional, simplicidade de uso e exportação estruturada de dados.
+## 📖 Sobre o projeto
 
----
+O **Workshift Manager** é uma aplicação desktop desenvolvida em Python, com interface gráfica em Tkinter e persistência local em SQLite. Seu objetivo é automatizar a criação e o gerenciamento de escalas de trabalho semanais e mensais, facilitando a organização dos colaboradores e reduzindo processos manuais.
 
-## 🎯 Proposta de Valor
+A geração das escalas utiliza regras determinísticas: considera o turno, os dias de folga e o período selecionado, sem empregar aleatoriedade. Dessa forma, os mesmos dados de entrada produzem resultados consistentes e previsíveis.
 
-Fornecer uma solução prática e eficiente para geração de escalas semanais e mensais, reduzindo esforço manual e garantindo consistência na distribuição de turnos.
+O projeto possui uma arquitetura com responsabilidades separadas entre interface, regras de negócio, modelos e acesso aos dados. Como os dados permanecem armazenados localmente e não há integração com APIs externas, a aplicação não expõe informações por meio de serviços remotos.
 
-**Benefícios principais:**
+## ✨ Funcionalidades
 
-- Automatização da geração de escalas com base em regras determinísticas
-- Organização clara de colaboradores e turnos
-- Exportação estruturada para Excel
-- Interface direta e de baixo atrito (desktop)
+### Gestão de colaboradores
 
----
+- Cadastro de colaboradores com nome, cargo, turno, dias de folga e status;
+- edição e exclusão de colaboradores;
+- definição dos turnos Manhã e Tarde;
+- configuração dos dias de folga;
+- ativação e desativação de colaboradores.
 
-## ⚙️ Funcionalidades
+### Geração e visualização de escalas
 
-### Gestão de Colaboradores
+- Geração automática de escalas semanais ou mensais;
+- seleção do período por data inicial no formato `DD/MM/AAAA`;
+- aplicação automática dos dias de folga;
+- distribuição determinística, sem aleatoriedade;
+- organização das escalas por dia;
+- filtro por turno;
+- exibição em tabela com TreeView;
+- destaque visual dos turnos.
 
-- Cadastro com nome, cargo, turno (Manhã/Tarde), dias de folga e status (Ativo/Inativo)
-- Edição e exclusão de registros
+### Importação e exportação
 
-### Geração de Escalas
+- Exportação das escalas para Excel (`.xlsx`);
+- importação de dados da versão anterior (v1);
+- normalização automática dos dados legados importados.
 
-- Geração semanal ou mensal
-- Baseada em data inicial (DD/MM/AAAA)
-- Aplicação automática de dias de folga
-- Filtro por turno
-- Agrupamento por dia
-- Distribuição baseada em regras determinísticas (sem aleatoriedade)
+## 🖼️ Screenshots
 
-### Visualização
+### Cadastro de colaboradores
 
-- Exibição em tabela (TreeView)
-- Destaque visual por turno
-- Organização opcional por dia
+![Tela de cadastro de colaboradores](https://i.postimg.cc/ZKrMmcWv/Projeto-Pythontabelafolgamercado2.png)
 
-### Exportação e Importação
+### Geração de escala semanal
 
-- Exportação para Excel (`.xlsx`)
-- Importação de dados de versão anterior (v1)
-- Normalização automática de dados legados
+![Tela de geração da escala semanal](https://i.postimg.cc/vBNv71c8/Projeto-Pythontabelafolgamercado.png)
 
----
+## 🚀 Tecnologias
 
-## 🏗️ Arquitetura / Estrutura
+- Python 3.x;
+- Tkinter para a interface gráfica;
+- SQLite e o módulo nativo `sqlite3` para persistência local;
+- Pandas para manipulação de dados;
+- OpenPyXL para geração de arquivos Excel.
 
-Separação clara de responsabilidades:
+## ⚙️ Como executar
 
-- **UI (Tkinter)** → interface gráfica e interação do usuário
-- **Services** → regras de negócio (escala, exportação, importação)
-- **Models** → representação de entidades
-- **Database** → persistência SQLite
+### Pré-requisitos
 
-**Lógica de geração de escala:**
+- Python 3.x instalado;
+- terminal PowerShell;
+- código-fonte do projeto disponível localmente.
 
-A geração segue regras determinísticas, garantindo previsibilidade e consistência:
+### Criar o ambiente virtual
 
-- Considera:
-  - Dias de folga configurados
-  - Turno do colaborador
-  - Período selecionado (semanal ou mensal)
-- Não utiliza aleatoriedade
-- Garante repetibilidade para os mesmos inputs
+No diretório que contém o projeto, execute:
 
-## 📁 Estrutura do Projeto:
+```powershell
+cd workshift-manager
 
-```bash
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+```
+
+### Instalar as dependências
+
+```powershell
+pip install -r requirements.txt
+```
+
+### Executar a aplicação
+
+```powershell
+python -m app.main
+```
+
+### Verificação funcional
+
+Após iniciar a aplicação, o fluxo principal pode ser verificado com o seguinte checklist:
+
+1. Cadastrar colaboradores com diferentes turnos;
+2. gerar uma escala semanal;
+3. gerar uma escala mensal;
+4. aplicar o filtro por turno;
+5. exportar uma escala para Excel;
+6. importar dados de uma versão anterior.
+
+## 📂 Estrutura do projeto
+
+A aplicação separa a interface gráfica, os modelos, as regras de negócio e a persistência de dados:
+
+```text
 workshift-manager/
 ├── app/
 │   ├── main.py
@@ -84,75 +114,29 @@ workshift-manager/
 └── requirements.txt
 ```
 
----
+- `app/main.py`: ponto de entrada da aplicação;
+- `app/ui.py`: interface gráfica e interação com o usuário;
+- `app/models.py`: representação das entidades;
+- `app/services.py`: regras de negócio, geração das escalas, exportação e importação;
+- `app/database.py`: operações de persistência em SQLite;
+- `data/database.db`: banco de dados local;
+- `assets/`: recursos utilizados pela aplicação;
+- `requirements.txt`: dependências necessárias para execução.
 
-## 🔐 Segurança
+## 🌐 Deploy
 
-- Armazenamento local via SQLite (sem exposição externa)
-- Ausência de integração com APIs externas
-- Baixa superfície de ataque (aplicação desktop)
-- Validação básica de dados de entrada
+O Workshift Manager é uma aplicação desktop e, portanto, não possui deploy web. O projeto deve ser instalado e executado localmente após a criação do ambiente virtual e a instalação das dependências indicadas em `requirements.txt`.
 
----
-
-## 🧰 Stack Tecnológica
-
-- Python 3.x
-- Tkinter (interface gráfica)
-- SQLite (`sqlite3`)
-- Pandas
-- OpenPyXL
-
----
-
-## 🚀 Instalação
-
-### Pré-requisitos
-
-- Python 3.x instalado
-
-### Passos
-
-```powershell
-cd workshift-manager
-
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
-
-pip install -r requirements.txt
-```
-
-## ▶️ Execução
-
-```powershell
-python -m app.main
-```
-
-## 🧪 Testes Rápidos
-
-**Checklist funcional:**
-
-1. Cadastrar colaboradores com diferentes turnos
-2. Gerar escala semanal
-3. Gerar escala mensal
-4. Aplicar filtro por turno
-5. Exportar escala para Excel
-6. Importar dados de versão anterior
-
-## 📸 Screenshots
-
-- Tela de cadastro de colaboradores
-
-![Tela do Projeto 1](https://i.postimg.cc/ZKrMmcWv/Projeto-Pythontabelafolgamercado2.png)
-
-- Geração de escala semanal
-
-![Tela do Projeto 2](https://i.postimg.cc/vBNv71c8/Projeto-Pythontabelafolgamercado.png)
-
----
+Os dados são mantidos no banco SQLite local, sem necessidade de configurar um servidor de banco de dados ou serviço externo.
 
 ## 👤 Autor
 
-Natan Da Luz  
-Desenvolvedor de Software  
-Contato: natandaluz01@gmail.com
+**Natan Da Luz**
+
+- LinkedIn: [linkedin.com/in/natandaluz](https://www.linkedin.com/in/natandaluz/)
+- Portfólio: [portfolionatan.vercel.app](https://portfolionatan.vercel.app/)
+- E-mail: [natandaluz01@gmail.com](mailto:natandaluz01@gmail.com)
+
+## 📄 Licença
+
+Este projeto está sem uma licença definida no momento.
