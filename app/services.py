@@ -207,7 +207,7 @@ class ScheduleService:
             elif "manha" in turno_raw or "manhã" in turno_raw:
                 turno = "Manhã"
             else:
-                turno = "Manhã"  # padrão
+                turno = "Manhã"
             c = Collaborator(id=None, name=name, role=role, shift=turno, days_off=days_off, status="Ativo")
             collab_service.create(c)
             imported += 1
