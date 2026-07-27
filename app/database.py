@@ -7,7 +7,7 @@ DB_NAME = "database.db"
 
 class Database:
     def __init__(self) -> None:
-        # Localiza a pasta base do projeto (workshift-manager/)
+        # Localiza a pasta base do projeto 
         base_dir = Path(__file__).resolve().parents[1]
         data_dir = base_dir / "data"
         data_dir.mkdir(parents=True, exist_ok=True)
