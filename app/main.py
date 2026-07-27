@@ -6,7 +6,7 @@ from .ui import AppUI
 from .services import CollaboratorService, ScheduleService
 
 def main() -> None:
-    # Inicializa banco e interface
+    # Inicializa o banco e interface
     db = Database()
     db.init_schema()
     CollaboratorService(db).normalize_shifts()
