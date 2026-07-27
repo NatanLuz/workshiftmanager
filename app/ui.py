@@ -65,7 +65,7 @@ class AppUI:
             cb = ttk.Checkbutton(days_frame, text=w, variable=var)
             cb.pack(side=tk.LEFT, padx=2)
 
-        # Buttons para ações
+        # Botões para ações
         btns = ttk.Frame(collab_frame)
         btns.pack(fill=tk.X, padx=5, pady=5)
         ttk.Button(btns, text="Adicionar", command=self._add_collaborator).pack(side=tk.LEFT, padx=3)
@@ -74,7 +74,7 @@ class AppUI:
         ttk.Button(btns, text="Limpar seleção", command=self._clear_selection).pack(side=tk.LEFT, padx=3)
         ttk.Button(btns, text="Importar Excel (v1)", command=self._import_excel_v1).pack(side=tk.RIGHT, padx=3)
 
-        # Lista de colaboradores 
+        # Desenvolvendo Lista de colaboradores 
         cols = ("ID", "Nome", "Cargo", "Turno", "Folga", "Status")
         self.collab_tree = ttk.Treeview(collab_frame, columns=cols, show="headings", height=8)
         for c in cols:
@@ -88,7 +88,7 @@ class AppUI:
         self.collab_tree.pack(fill=tk.X, padx=5, pady=5)
         self.collab_tree.bind("<<TreeviewSelect>>", self._on_collab_selected)
 
-        # Seção de escala de trabalho
+        # Seção da escala de trabalho
         sched_frame = ttk.LabelFrame(container, text="Escala de Trabalho")
         sched_frame.pack(fill=tk.BOTH, expand=True, padx=5, pady=5)
 
@@ -266,7 +266,7 @@ class AppUI:
             self.sched_tree.delete(i)
         
         if self.group_by_day_var.get() == 1:
-            # Agrupa por data
+            # Agrupando por data
             by_date: dict[str, list[ScheduleEntry]] = {}
             for e in entries:
                 by_date.setdefault(e.date, []).append(e)
